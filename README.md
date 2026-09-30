@@ -51,12 +51,22 @@ with.
 
 ## Charts
 
-1. `01_parallel_trends.png` — test vs control indexed sales; parallel pre-test, divergence in test window
-2. `02_event_study.png` — weekly lift coefficients; no pre-trend, effect starts at week 53
-3. `03_lift_estimate.png` — recovered +6.7% vs true 8%, with the clean placebo beside it
-4. `04_placebo_distribution.png` — exact randomization distribution over all 1,024 within-pair reassignments; observed lift marked (p = 0.016)
-5. `05_power_curve.png` — power vs true lift; MDE(80%) = 7.5%
-6. `06_match_quality.png` — pre-period similarity heatmap with chosen pairs marked
+The three that carry the argument:
+
+![Parallel trends: test vs control indexed sales](charts/01_parallel_trends.png)
+
+![Recovered lift vs known truth](charts/03_lift_estimate.png)
+
+![Power curve](charts/05_power_curve.png)
+
+All six:
+
+1. `01_parallel_trends.png`: test vs control indexed sales; parallel pre-test, divergence in test window
+2. `02_event_study.png`: weekly lift coefficients; no pre-trend, effect starts at week 53
+3. `03_lift_estimate.png`: recovered +6.7% vs true 8%, with the placebo beside it
+4. `04_placebo_distribution.png`: exact randomization distribution over all 1,024 within-pair reassignments; observed lift marked (p = 0.016)
+5. `05_power_curve.png`: power vs true lift; MDE(80%) = 7.5%
+6. `06_match_quality.png`: pre-period similarity heatmap with chosen pairs marked
 
 ## Reproduce it
 
