@@ -4,15 +4,16 @@ A complete, end-to-end geo-experiment case study for a fictional CPG brand
 (**Everline Foods**). Ten test DMAs get incremental streaming-video weight for
 8 weeks; ten matched control DMAs don't. Diff-in-diff recovers the lift, and
 because **all data are simulated with a known true lift (+8%)**, the analysis
-is graded against the truth — the one validation you can never run on real data.
+is graded against the truth. That is the one validation you can never run
+on real data.
 
-Companion project: [MMM case study](https://github.com/matthewkaran33/mmm-case-study)
-— observational modeling on the same fictional brand. This repo is the
+Companion project: [MMM case study](https://github.com/matthewkaran33/mmm-case-study),
+observational modeling on the same fictional brand. This repo is the
 experimental half: the "test and learn" behind the model.
 
 ## Headline findings
 
-- **Recovered lift: +6.7%** (95% CI +0.7% to +13.0%, p = 0.030) vs a **true lift of +8%** — 1.3 points under, inside the interval. The interval did its job.
+- **Recovered lift: +6.7%** (95% CI +0.7% to +13.0%, p = 0.030) vs a **true lift of +8%**: 1.3 points under the truth, but the interval covers it.
 - **Placebo checks clean**: fake test window in the pre-period finds nothing (p = 0.80); exact randomization inference over all 1,024 possible within-pair treatment assignments gives p = 0.016.
 - **Synthetic control agrees**: +6.0% mean lift across test geos.
 - **Design was powered**: minimum detectable effect 7.5% at 80% power; 94% power at the true 8% lift.
@@ -49,7 +50,7 @@ pip install -r requirements.txt
 python3 analysis/test_estimators.py
 ```
 
-Requires Python 3. Fixed seeds — the numbers above regenerate exactly.
+Requires Python 3. Fixed seeds: the numbers above regenerate exactly.
 (statsmodels is a test-only dependency; the analysis itself runs on
 numpy/pandas/matplotlib/scipy.)
 

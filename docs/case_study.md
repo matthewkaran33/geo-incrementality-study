@@ -2,7 +2,7 @@
 
 **All data in this project are simulated.** The brand ("Everline Foods") is fictional.
 The point of the simulation is that the true lift is *known*, so the analysis
-can be graded against it — something you can never do with real data.
+can be graded against it. You can never do that with real data.
 
 ## The question
 
@@ -10,14 +10,14 @@ Everline Foods is considering adding streaming-video weight nationally and wants
 to know one thing: does the extra spend actually cause extra sales, or would
 those sales have happened anyway? A marketing mix model can estimate this from
 history (see my companion [MMM case study](https://github.com/matthewkaran33/mmm-case-study)),
-but MMM is observational — it can be fooled by anything that moves with spend.
+but MMM is observational: it can be fooled by anything that moves with spend.
 A geo-experiment answers the question causally: spend more in some markets,
 hold others back, and compare.
 
-## Why geo-experiments — and what they can't do
+## Why geo-experiments, and what they can't do
 
 Geo-experiments are the closest thing media measurement has to a randomized
-trial. They handle the problems that keep MMM honest people up at night:
+trial. They handle the problems that make MMM hard to trust:
 unobserved confounders, spend that follows expected demand, promotions that
 coincide with flights.
 
@@ -26,15 +26,15 @@ weight, not the average effectiveness of the channel. They take weeks and cost
 real money. They assume no spillover between test and control markets (no
 national spill from a streaming buy is a reasonable assumption; it would not
 be for a national TV flight). And eight weeks tells you nothing about
-long-run or lagged effects. I treat geo-testing and MMM as complements, not
-rivals: the experiment calibrates the model, the model generalizes the
-experiment.
+long-run or lagged effects. I use geo-testing and MMM together: the
+experiment gives a causal anchor, and the model extends that read to
+channels and time periods the test does not cover.
 
 ## Test design
 
 - **50 geos**, 78 weeks of weekly sales each: 52 pre-period, 8 test, 18 post.
-- The **largest market (G31) was held out** of the test pool — standard practice,
-  too much revenue at risk to experiment on.
+- The **largest market (G31) was held out** of the test pool: standard
+  practice, since there is too much revenue at risk to experiment on.
 - From the remaining 49, **10 test geos were drawn at random**, then each was
   paired with its most similar control using optimal (Hungarian) assignment on
   pre-period sales correlations, with a size band of 0.5x–2x. Matching used
@@ -43,7 +43,7 @@ experiment.
 - **Treatment was randomized within pairs** (coin flip), giving 10 test and
   10 control geos.
 - Test window: **weeks 53–60**. Test geos received incremental streaming-video
-  weight calibrated to a **true lift of +8%** — baked into the simulation so
+  weight calibrated to a **true lift of +8%**, baked into the simulation so
   the analysis can be checked against it.
 
 The sales data itself has everything that makes real geo data annoying:
@@ -65,8 +65,8 @@ Before reading results, I checked the design could actually detect the effect.
 | 10%+ | 100% |
 
 Minimum detectable effect at 80% power: **7.5%**. The design is adequately
-powered for the true 8% lift, and would likely miss anything under ~6% — worth
-knowing before spending the money, not after.
+powered for the true 8% lift, and would likely miss anything under ~6%.
+That is worth knowing before the money is spent.
 
 ## Results
 
@@ -75,13 +75,13 @@ clustered by geo):
 
 - **Recovered lift: +6.7%**, 95% CI [+0.7%, +13.0%], p = 0.030.
 
-The honest version: the point estimate came in **1.3 points under the true 8%**.
-That's sampling noise, not bias — the 95% interval covers the truth comfortably,
-and the estimate is statistically distinguishable from zero. This is exactly
-why you report intervals instead of points: the interval did its job.
+The point estimate came in **1.3 points under the true 8%**. That is
+sampling noise, not bias: the 95% interval covers the truth, and the estimate
+is statistically distinguishable from zero. This is why you report intervals
+instead of points.
 
-The event study (chart 02) shows no pre-trend — weekly coefficients hover
-around zero through week 52 — and the lift appears exactly when the test
+The event study (chart 02) shows no pre-trend: weekly coefficients hover
+around zero through week 52, and the lift appears exactly when the test
 starts. Parallel trends, the one assumption that matters, holds.
 
 ## Placebo checks
@@ -98,7 +98,7 @@ Two falsification tests, both clean:
 ## Robustness
 
 - **Synthetic control** (one per test geo, donors = the 10 control markets,
-  weights constrained non-negative and summing to 1): mean lift **+6.0%** —
+  weights constrained non-negative and summing to 1): mean lift **+6.0%**,
   right in line with the DiD estimate.
 - **Pair-level estimates** ranged from about +1% to +12% across the 10 pairs.
   That spread is normal with 10 pairs; it's also why nobody should make a
@@ -107,9 +107,9 @@ Two falsification tests, both clean:
 ## What it means for the media decision
 
 The test says the streaming-video increment works: roughly +7% sales in
-treated markets, causal, surviving every falsification check I ran. If the
+treated markets, causal, and the falsification checks came back clean. If the
 incremental spend behind that weight costs less than the margin on ~7% of
-8 weeks of sales in those markets, it pays for itself — roll it out, and use
+8 weeks of sales in those markets, it pays for itself. Roll it out, and use
 the measured lift to calibrate the always-on MMM rather than replacing it.
 
 What I would *not* claim: that streaming video always returns +7%, that the
@@ -118,7 +118,7 @@ lift. The test measured one weight, in ten markets, for eight weeks.
 
 ## Limitations
 
-- Simulated data: the DGP is realistic but tidier than reality — no
+- Simulated data: the DGP is realistic but tidier than reality: no
   hurricanes, no competitor conquesting, no supply outages.
 - SUTVA assumed: no spillover between test and control geos. Plausible for a
   streaming buy, but untestable here.
