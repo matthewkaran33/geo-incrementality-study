@@ -91,23 +91,25 @@ def p03_lift_estimate():
 
 
 def p04_placebo_distribution():
-    perm = pd.read_csv("data/placebo_permutation.csv")["perm_delta_logpts"] * 100
+    perm = pd.read_csv("data/placebo_permutation.csv")["ri_delta_logpts"] * 100
     with open("data/analysis_summary.json") as f:
         summ = json.load(f)
     obs = summ["did_lift_pct"]
+    n = summ["randomization_n_assignments"]
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.hist(perm, bins=30, color=GRAY, alpha=0.7, edgecolor="white")
     ax.axvline(obs, color=NAVY, lw=2.5, label=f"Observed: {obs:.1f}%")
     ax.axvline(-obs, color=NAVY, lw=1.5, ls=":")
-    ax.set_xlabel("Fake-treatment lift (%)")
-    ax.set_ylabel("Count of 500 permutations")
+    ax.set_xlabel("Reassigned-treatment lift (%)")
+    ax.set_ylabel(f"Count of {n:,} reassignments")
     ax.legend(frameon=False)
-    ax.text(0.98, 0.95, f"permutation p = {summ['permutation_p']:.3f}",
+    ax.text(0.98, 0.95, f"randomization p = {summ['randomization_p']:.3f}",
             transform=ax.transAxes, ha="right", va="top", fontsize=11,
             bbox=dict(boxstyle="round", fc="white", ec="gray"))
-    finalize(fig, ax, "Permutation placebo: the observed lift is not random noise",
+    finalize(fig, ax, "Randomization check: observed lift vs all 1,024 "
+                      "within-pair reassignments",
              "04_placebo_distribution.png",
-             note=SRC + " \u2014 500 random reassignments of treatment across 50 geos")
+             note=SRC + " \u2014 1,024 within-pair treatment reassignments (exact)")
 
 
 def p05_power_curve():

@@ -8,6 +8,7 @@
   "true_lift_pct": 8.0,
   "placebo_in_time_delta": -0.00548,
   "placebo_in_time_p": 0.7951,
-  "permutation_p": 0.002,
+  "randomization_p": 0.0156,
+  "randomization_n_assignments": 1024,
   "synth_control_mean_lift_pct": 6.02
 }

@@ -13,7 +13,7 @@ experimental half: the "test and learn" behind the model.
 ## Headline findings
 
 - **Recovered lift: +6.7%** (95% CI +0.7% to +13.0%, p = 0.030) vs a **true lift of +8%** — 1.3 points under, inside the interval. The interval did its job.
-- **Placebo checks clean**: fake test window in the pre-period finds nothing (p = 0.80); the observed lift beats 99.8% of 500 random treatment reassignments.
+- **Placebo checks clean**: fake test window in the pre-period finds nothing (p = 0.80); exact randomization inference over all 1,024 possible within-pair treatment assignments gives p = 0.016.
 - **Synthetic control agrees**: +6.0% mean lift across test geos.
 - **Design was powered**: minimum detectable effect 7.5% at 80% power; 94% power at the true 8% lift.
 
@@ -35,7 +35,7 @@ experimental half: the "test and learn" behind the model.
 1. `01_parallel_trends.png` — test vs control indexed sales; parallel pre-test, divergence in test window
 2. `02_event_study.png` — weekly lift coefficients; no pre-trend, effect starts at week 53
 3. `03_lift_estimate.png` — recovered +6.7% vs true 8%, with the clean placebo beside it
-4. `04_placebo_distribution.png` — 500 permutations; observed lift is not noise (p = 0.002)
+4. `04_placebo_distribution.png` — exact randomization distribution over all 1,024 within-pair reassignments; observed lift marked (p = 0.016)
 5. `05_power_curve.png` — power vs true lift; MDE(80%) = 7.5%
 6. `06_match_quality.png` — pre-period similarity heatmap with chosen pairs marked
 

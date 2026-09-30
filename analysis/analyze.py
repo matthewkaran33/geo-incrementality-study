@@ -14,7 +14,25 @@ sys.path.insert(0, "analysis")
 from did import did_estimate, event_study
 from simulate import TRUE_LIFT, TEST_START, TEST_END, N_PRE
 
-PERM_DRAWS, PERM_SEED = 500, 99
+
+def randomization_pvalue(panel20, pairs, observed_delta, post_weeks):
+    """Exact Fisher randomization inference over all 2^10 within-pair
+    treatment assignments -- the experiment's actual assignment mechanism.
+
+    Under the sharp null of no treatment effect, the observed panel is the
+    untreated panel, so re-running the DiD estimator under every possible
+    within-pair assignment gives the exact null distribution of the test
+    statistic. Returns (p_value, array of 1,024 statistics).
+    """
+    pair_list = list(pairs[["treated_geo", "control_geo"]]
+                     .itertuples(index=False, name=None))
+    stats = np.empty(1 << len(pair_list))
+    for mask in range(1 << len(pair_list)):
+        fake = {a if (mask >> i) & 1 else b
+                for i, (a, b) in enumerate(pair_list)}
+        stats[mask] = did_estimate(panel20, fake, post_weeks)["delta"]
+    p = float((np.abs(stats) >= abs(observed_delta)).mean())
+    return p, stats
 
 
 def load_observed():
@@ -76,20 +94,13 @@ def main():
     es = event_study(panel20, treated, list(range(41, TEST_END + 1)), ref_week=N_PRE)
     es.to_csv("data/event_study.csv", index=False)
 
-    # 4. permutation placebo: random fake treatment across all 50 geos
-    rng = np.random.default_rng(PERM_SEED)
-    all_geos = obs["geo_id"].unique().tolist()
-    perm_deltas = []
-    for k in range(PERM_DRAWS):
-        fake = set(rng.choice(all_geos, size=len(treated), replace=False))
-        rk = did_estimate(panel[panel["geo_id"].isin(all_geos)], fake, post_weeks)
-        perm_deltas.append(rk["delta"])
-    perm_deltas = np.array(perm_deltas)
-    perm_p = float((np.abs(perm_deltas) >= abs(r["delta"])).mean())
-    pd.DataFrame({"perm_delta_logpts": perm_deltas}).to_csv(
+    # 4. exact randomization inference: all 2^10 within-pair assignments
+    ri_p, ri_stats = randomization_pvalue(panel20, pairs, r["delta"],
+                                          post_weeks)
+    pd.DataFrame({"ri_delta_logpts": ri_stats}).to_csv(
         "data/placebo_permutation.csv", index=False)
-    print(f"permutation placebo: p={perm_p:.3f} "
-          f"(|fake| >= |observed| in {PERM_DRAWS} draws)")
+    print(f"randomization inference: p={ri_p:.4f} "
+          f"(|reassigned| >= |observed| over {len(ri_stats)} assignments)")
 
     # 5. synthetic control per treated geo (donors = 10 control geos)
     controls = pairs["control_geo"].tolist()
@@ -144,7 +155,8 @@ def main():
             "true_lift_pct": TRUE_LIFT * 100,
             "placebo_in_time_delta": round(float(rp["delta"]), 5),
             "placebo_in_time_p": round(float(rp["p"]), 4),
-            "permutation_p": round(perm_p, 4),
+            "randomization_p": round(ri_p, 4),
+            "randomization_n_assignments": int(len(ri_stats)),
             "synth_control_mean_lift_pct": round(
                 float((np.exp(sc["sc_lift_logpts"].mean()) - 1) * 100), 2),
         }, f, indent=2)

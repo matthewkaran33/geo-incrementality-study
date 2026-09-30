@@ -90,9 +90,10 @@ Two falsification tests, both clean:
 
 1. **Placebo in time**: ran the same DiD on the pre-period with a fake 8-week
    "test" window. Estimated lift: −0.5%, p = 0.80. Nothing there, as expected.
-2. **Permutation placebo**: randomly reassigned treatment across all 50 geos
-   500 times and re-ran the analysis. The observed +6.7% beat 99.8% of fake
-   assignments (p = 0.002). The result is not random noise.
+2. **Randomization check**: the experiment randomized treatment within 10
+   matched pairs, so the exact null distribution comes from re-running the
+   DiD under all 1,024 possible within-pair assignments. The observed +6.7%
+   is larger in absolute value than 98.4% of them (p = 0.016).
 
 ## Robustness
 
