@@ -57,6 +57,16 @@ channels and time periods the test does not cover.
   weight calibrated to a **true lift of +8%**, baked into the simulation so
   the analysis can be checked against it.
 
+Two design decisions took real work. The first matching attempt was greedy:
+pair each test geo with its best available control, one at a time. That
+stranded one test geo with no size-compatible control left. Switching to
+optimal (Hungarian) assignment over the full correlation matrix fixed it,
+and holding out the single largest market removed the infeasible case
+entirely. The second problem was the matching basis: raw weekly sales gave
+weak pairs (minimum correlation 0.53) because promo spikes and noise were
+driving the matches. Matching on 4-week rolling averages pairs markets on
+trend similarity instead, and the weakest pair came up to 0.88.
+
 The sales data itself has everything that makes real geo data annoying:
 annual seasonality, market-specific trends, promo spikes, and a demand shock
 hitting all markets mid-test (weeks 55–56). A good design should see through
