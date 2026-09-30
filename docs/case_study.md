@@ -145,6 +145,42 @@ setup, and most of that sits with the media team:
   triggers a rollout. Without it, the test gets re-litigated after the
   results are in.
 
+## Running this for real
+
+A few things the simulation never has to deal with:
+
+- **Spillover between geos.** The analysis assumes a test market's extra
+  weight doesn't move sales in control markets. For streaming video with
+  DMA-level targeting that is usually defensible. It would not be for
+  national cable, radio with overlapping signals, or any tactic the buy
+  can't contain. In practice I would check for it directly: if control
+  markets bordering test markets lift too, the estimate is attenuated and
+  the design needs rethinking.
+- **Delivery compliance.** Planned weight is not delivered weight. The media
+  team has to confirm what actually ran in each test DMA, week by week:
+  impressions, spend, and whether the buy delivered evenly or bunched into
+  a few days. A test market that under-delivered is a weak-treated unit,
+  not a clean read, and the analysis should know which is which.
+- **Inventory constraints.** Some DMAs can't take incremental weight at any
+  price during the test window. That has to be established before markets
+  are picked, not after: swapping markets post-randomization breaks the
+  design.
+- **Minimum spend to move a DMA.** A small market needs enough incremental
+  weight to produce a detectable sales move. This is what the power
+  analysis is for: size the weight per market so the expected lift clears
+  the MDE, or accept that the small markets are along for the ride and the
+  read comes from the larger ones.
+- **Retailer overlap.** If one chain dominates several test and control
+  markets and runs its own promos during the window, those promos are a
+  confounder the time fixed effects may not fully absorb. Geo-level promo
+  and distribution flags in the sales data are the fix, which is why
+  they're on the requirements list above.
+- **Whether a DMA can be held out.** The largest market was held out here
+  because the revenue at risk was too high. The real rule: hold out
+  markets where the cost of being wrong exceeds the value of the
+  information. That is a business call, not a statistical one, and it
+  should be made explicitly before the test, not argued about after.
+
 ## Limitations
 
 - Simulated data: the DGP is realistic but tidier than reality: no
