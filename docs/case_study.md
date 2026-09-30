@@ -122,8 +122,12 @@ lift. The test measured one weight, in ten markets, for eight weeks.
   hurricanes, no competitor conquesting, no supply outages.
 - SUTVA assumed: no spillover between test and control geos. Plausible for a
   streaming buy, but untestable here.
-- Ten pairs is enough for a precise average effect but thin for studying
-  *which* markets respond most.
+- Ten pairs detected a positive average effect, but the 95% interval (+0.7%
+  to +13.0%) leaves substantial uncertainty. For a media decision, that
+  matters: the test rules out zero or negative lift, but the ROI case looks
+  very different at +1% than at +13%. A rollout call has to be made on
+  expected value across that range, not on the +6.7% point estimate. Ten
+  pairs is also thin for studying *which* markets respond most.
 - The common demand shock in weeks 55–56 was absorbed by time fixed effects;
   a shock hitting only test markets would not have been.
 
