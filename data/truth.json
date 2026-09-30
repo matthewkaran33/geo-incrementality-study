@@ -1,0 +1,15 @@
+{
+  "simulated": true,
+  "brand": "Everline Foods (fictional)",
+  "n_geos": 50,
+  "n_pre_weeks": 52,
+  "n_test_weeks": 8,
+  "n_post_weeks": 18,
+  "true_lift_pct": 8.0,
+  "true_lift_logpts": 0.07696,
+  "test_weeks": [
+    53,
+    60
+  ],
+  "notes": "Treatment effect applies to treated geos only, test weeks only. All sales figures are simulated."
+}

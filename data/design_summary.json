@@ -1,0 +1,36 @@
+{
+  "n_pairs": 10,
+  "holdout_geo": "G31",
+  "holdout_reason": "largest market held out of testing (revenue at risk)",
+  "treated_geos": [
+    "G26",
+    "G40",
+    "G41",
+    "G47",
+    "G45",
+    "G37",
+    "G39",
+    "G03",
+    "G46",
+    "G25"
+  ],
+  "control_geos": [
+    "G18",
+    "G19",
+    "G36",
+    "G17",
+    "G48",
+    "G15",
+    "G16",
+    "G01",
+    "G11",
+    "G29"
+  ],
+  "mean_pre_corr": 0.9158,
+  "mde_80_pct": 7.48,
+  "power_at_true_lift": 0.945,
+  "seeds": {
+    "match": 7,
+    "randomization": 11
+  }
+}

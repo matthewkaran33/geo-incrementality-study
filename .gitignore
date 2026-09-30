@@ -1,0 +1,13 @@
+# intermediate build artifacts (not part of the published project)
+data/_*.csv
+data/_*.npz
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

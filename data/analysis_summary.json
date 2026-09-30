@@ -1,0 +1,13 @@
+{
+  "did_lift_pct": 6.66,
+  "did_ci_pct": [
+    0.71,
+    12.95
+  ],
+  "did_p": 0.0297,
+  "true_lift_pct": 8.0,
+  "placebo_in_time_delta": -0.00548,
+  "placebo_in_time_p": 0.7951,
+  "permutation_p": 0.002,
+  "synth_control_mean_lift_pct": 6.02
+}
