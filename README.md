@@ -27,6 +27,8 @@ experimental half: the "test and learn" behind the model.
 | `analysis/analyze.py` | DiD, event study, placebo tests, synthetic control |
 | `analysis/plots.py` | All charts |
 | `analysis/did.py` | Two-way FE DiD with geo-clustered SEs (numpy/scipy) |
+| `analysis/test_estimators.py` | Validation tests: DiD vs statsmodels OLS, randomization inference |
+| `requirements.txt` | Pinned Python dependencies |
 | `data/` | Tidy simulated CSVs: weekly panel, market matches, results, power curve |
 | `charts/` | Six PNGs (see below) |
 
@@ -42,11 +44,14 @@ experimental half: the "test and learn" behind the model.
 ## Reproduce it
 
 ```bash
+pip install -r requirements.txt
 ./run_all.sh
+python3 analysis/test_estimators.py
 ```
 
-Requires Python 3 with numpy, pandas, matplotlib, scipy. Fixed seeds — the
-numbers above regenerate exactly.
+Requires Python 3. Fixed seeds — the numbers above regenerate exactly.
+(statsmodels is a test-only dependency; the analysis itself runs on
+numpy/pandas/matplotlib/scipy.)
 
 ## Data note
 

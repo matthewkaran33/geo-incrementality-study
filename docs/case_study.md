@@ -130,8 +130,12 @@ lift. The test measured one weight, in ten markets, for eight weeks.
 ## Reproduce it
 
 ```bash
+pip install -r requirements.txt
 ./run_all.sh
+python3 analysis/test_estimators.py
 ```
 
 `analysis/simulate.py` → `design.py` → `analyze.py` → `plots.py`.
-Seeds are fixed; the numbers above regenerate exactly.
+Seeds are fixed; the numbers above regenerate exactly. The test script
+checks the hand-rolled DiD against statsmodels OLS and verifies the
+randomization inference rejects with a real lift and not without one.
