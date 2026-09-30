@@ -18,6 +18,22 @@ experimental half: the "test and learn" behind the model.
 - **Synthetic control agrees**: +6.0% mean lift across test geos.
 - **Design was powered**: minimum detectable effect 7.5% at 80% power; 94% power at the true 8% lift.
 
+## Why I built this
+
+Most of my measurement work is MMM and observational modeling. This project
+is the other half: designing and analyzing the experiment that gives the
+model its causal grounding. Everything is simulated (I can't publish a real
+employer's test), but the design choices are the ones I'd make on a real one.
+
+## What running this for real requires
+
+Clean geo-level sales with promo flags, confirmed media delivery by market
+and week, holdout compliance in control markets, markets picked before the
+buy is locked, and a rollout decision rule agreed before launch. The case
+study spells out each one, plus the practical problems (spillover, inventory
+constraints, minimum spend per DMA) that the simulation doesn't have to deal
+with.
+
 ## Repo map
 
 | Path | What it is |

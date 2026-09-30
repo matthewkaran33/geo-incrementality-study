@@ -14,6 +14,17 @@ but MMM is observational: it can be fooled by anything that moves with spend.
 A geo-experiment answers the question causally: spend more in some markets,
 hold others back, and compare.
 
+## Why I built this
+
+Most of my measurement work has been on the MMM side: observational models,
+mix readouts, budget scenarios. That work is only as good as its causal
+grounding, and in media the way you get causal grounding is a test. I built
+this to show I can do both halves: design and analyze the experiment, not
+just model around it. Everything here is simulated because I can't publish a
+real employer's test, but the design choices are the ones I would make on a
+real one: matched markets, a power analysis before launch, randomization
+within pairs, and placebo checks that can actually fail.
+
 ## Why geo-experiments, and what they can't do
 
 Geo-experiments are the closest thing media measurement has to a randomized
@@ -115,6 +126,24 @@ the measured lift to calibrate the always-on MMM rather than replacing it.
 What I would *not* claim: that streaming video always returns +7%, that the
 effect persists beyond eight weeks, or that doubling the weight doubles the
 lift. The test measured one weight, in ten markets, for eight weeks.
+
+## What I would need from a real media team
+
+The analysis is the easy part. What makes or breaks a geo-test is the
+setup, and most of that sits with the media team:
+
+- **Clean geo-level sales, weekly**, with promo and distribution flags, so
+  the model can separate the media effect from everything else moving in
+  a market.
+- **Confirmed delivery by market and week**: what actually ran in each test
+  DMA, at what weight. Planned spend is not delivered spend.
+- **Holdout compliance**: agreement up front that control markets stay dark
+  on the tested tactic, and a way to verify it after the fact.
+- **Lead time to pick markets before the buy is locked**, so matching uses
+  pre-period data only and nobody swaps a market after seeing early reads.
+- **A decision rule agreed in advance**: what lift, at what confidence,
+  triggers a rollout. Without it, the test gets re-litigated after the
+  results are in.
 
 ## Limitations
 
